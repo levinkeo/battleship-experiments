@@ -7,10 +7,14 @@
     {{#if isOwner}}
       <button class="toggle-private">
         {{#if private}}
-          Private
+          STEALTH
         {{else}}
-          Public
+          visible
         {{/if}}
+      </button>
+    {{else}}
+      <button style="color: red;" class="toggle-private">
+        Enemy's Shot
       </button>
     {{/if}}
 

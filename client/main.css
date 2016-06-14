@@ -1,11 +1,24 @@
 /* CSS declarations go here */
+@import url(https://fonts.googleapis.com/css?family=VT323);
 body {
-  font-family: sans-serif;
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  font-family: 'VT323', sans-serif;
+  /*background-color: #315481;*/
+  /*background-image: linear-gradient(to bottom, #315481, #918e82 100%);*/
+ /* background-image: url(http://cdn2.hubspot.net/hubfs/481197/tumblr_m8z0ueTBZj1r6cq7jo1_500.gif);
+  background-repeat: repeat;
   background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.8);*/
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(http://cdn2.hubspot.net/hubfs/481197/tumblr_m8z0ueTBZj1r6cq7jo1_500.gif);
+    /* super slow: http://cdn2.hubspot.net/hubfs/481197/ezgif-535649326.gif;*/
+    /* full speed: http://cdn2.hubspot.net/hubfs/481197/tumblr_m8z0ueTBZj1r6cq7jo1_500.gif ;*/
 
-  position: absolute;
+  position: relative;
+  height: 100%;
   top: 0;
   bottom: 0;
   left: 0;
@@ -18,7 +31,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -27,26 +40,72 @@ body {
 header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
+  background: repeating-linear-gradient(
+  45deg,
+  yellow,
+  yellow 35px,
+  #000 35px,
+  #000 75px
+);
   padding: 20px 15px 15px 15px;
   position: relative;
+  -webkit-box-shadow: 0px 15px 55px -20px #000;
+}
+
+header label {
+  color: tomato;
+  font-size: 1.75em;
 }
 
 #login-buttons {
   display: block;
+  color: tomato;
+  font-size: 1.75em;
 }
 
 h1 {
-  font-size: 1.5em;
+  background: tomato;
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-size: 3.5em;
   margin: 0;
   margin-bottom: 10px;
-  display: inline-block;
   margin-right: 1em;
+  border-bottom: #CC4F39 solid 8px;
 }
 
 form {
   margin-top: 10px;
   margin-bottom: -10px;
   position: relative;
+}
+
+::-webkit-input-placeholder {
+   font-family: 'VT323', sans-serif;
+   font-size: 1.25em;
+   text-align: center;
+   -webkit-box-shadow: 0px 15px 55px -20px #000;
+}
+
+:-moz-placeholder { 
+   font-family: 'VT323', sans-serif; 
+}
+
+::-moz-placeholder {  
+   font-family: 'VT323', sans-serif;
+}
+
+:-ms-input-placeholder {  
+   font-family: 'VT323', sans-serif;  
+}
+
+.new-task {
+  border: tomato solid 6px;
+  border-bottom-color: #CC4F39;
+  background: #fff;
+  color: white;
+  margin-bottom: 15px;
 }
 
 .new-task input {
@@ -104,6 +163,8 @@ li.private {
 
 header .hide-completed {
   float: right;
+  position: relative;
+  z-index: 2;
 }
 
 .toggle-private {
@@ -124,3 +185,130 @@ header .hide-completed {
     padding-bottom: 5px;
   }
 }
+
+/* battleship styles */
+
+.controls {
+  border: 1px solid black;
+  height: 200px;
+}
+#ship-details {
+  display: none;
+}
+#error-message {
+  display: none;
+  color: tomato;
+}
+.grid table, .grid td {
+  background-color: #9BCEF5;
+}
+.grid td {
+  border: 1px solid #9BCEF5;
+  height: 50px;
+  width: 50px;
+  cursor: url(http://cdn2.hubspot.net/hubfs/481197/Crosshair-059934-edited.png) 25 15, auto;
+  font-size: 35px;
+  text-align: center;
+
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  background: white;
+  transition: background 0.2s ease-in-out;
+}
+
+.flip-container:active {
+    background-image: url('http://vignette3.wikia.nocookie.net/hanktheunstoppable/images/2/20/Explosion_gif_rxdl_xc1d.gif/revision/latest?cb=20100312015813');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all 3s;
+}
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+  transform: rotateY(180deg);
+
+}
+
+.flip-container, .front, .back {
+  /*width: 320px;
+  height: 480px;*/
+  width: 50px;
+  height: 50px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  margin-top: -25px;
+  background: red;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+  background-color: black;
+  background-image: radial-gradient(#0A8398 50%, #0289F0 10%, #4ECDE2 5%, #004969 35%);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+  margin-top: 6px;
+}
+
+.columnA::before{
+  background: tomato;
+  content: counter(section);
+  counter-increment: section;
+  position: absolute;
+  color: white;
+  z-index: 100;
+  top: 18%;
+  left: -90%;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+body {
+  counter-reset: section;
+}
+
+.grid {
+  counter-reset: part;
+  margin: 0 auto;
+  margin-top: 60px;
+  width: 80%;
+  min-width: 560px;
+  display: block;
+  padding-bottom: 50%;
+}
+
+#row1 > td div.label-append:before {
+  background: tomato;
+  content: counter(part, lower-alpha);
+  counter-increment: part;
+  position: absolute;
+  color: white;
+  z-index: 100;
+  top: -32px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+

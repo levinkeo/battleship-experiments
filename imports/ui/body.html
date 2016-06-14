@@ -1,26 +1,21 @@
 <body>
-  <div class="container">
-    <header>
-      <h1>Todo List ({{incompleteCount}})</h1>
-
-      <label class="hide-completed">
-        <input type="checkbox" />
-        Hide Completed Tasks
-      </label>
-
-      {{> loginButtons}}
-
-      {{#if currentUser}}
-        <form class="new-task">
-          <input type="text" name="text" placeholder="Type to add new tasks" />
-        </form>
-      {{/if}}
-    </header>
-
-    <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
-    </ul>
-  </div>
+    <div class="container">
+        <header>
+            <h1>Battleship Guess Log: ({{incompleteCount}})</h1>
+            <label class="hide-completed">
+                <input type="checkbox" /> Hide Completed Tasks
+            </label>
+            {{> loginButtons}} {{#if currentUser}}
+            <form class="new-task">
+                <input type="text" name="text" placeholder="Type to guess a ship!" />
+            </form>
+            {{/if}}
+        </header>
+        <div style="overflow-y: scroll; max-height: 300px">
+            <ul>
+                {{#each tasks}} {{> task}} {{/each}}
+            </ul>
+        </div>
+        {{> grid}}
+    </div>
 </body>
